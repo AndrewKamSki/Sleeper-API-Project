@@ -1,6 +1,7 @@
-var userName = "komestat";
-var userURL = 'https://api.sleeper.app/v1/user/' + userName;
-fetch(userURL)
+function getLeagues () {
+  var userName = $('#user-name').val();
+  var userURL = 'https://api.sleeper.app/v1/user/' + userName;
+  fetch(userURL)
   .then(function(response) {
     return response.json();
   })
@@ -16,7 +17,16 @@ fetch(userURL)
       return response.json();
     })
     .then(function(info) {
+      console.log(info)
       console.log(info[0].name)
+      for (var i=0; i<info.length; i++) {
+        var leagueEl = document.createElement("h3");
+        leagueEl.textContent = info[i].name;
+        leagueEl.id = info[i].league_id;
+        $('#main-card').append(leagueEl)
+      }
     })
   })
+}
 
+$('#continue').on('click', getLeagues);

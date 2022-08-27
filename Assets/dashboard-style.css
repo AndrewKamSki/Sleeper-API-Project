@@ -1,0 +1,60 @@
+/* Overall Stylings */
+body {
+  background-color: silver;
+}
+
+/* Card Stylings */
+.card {
+  background-color: #0f471c;
+  box-shadow: 5px 5px 5px darkgray;
+  border: 1px solid white;
+  border-radius: 10px;
+} .card-body {
+  color: whitesmoke;
+} .card-title {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+/* Text Stylings */
+.text-medium {
+  font-size: 25px;
+} .text-large {
+  font-size: 50px;
+}
+
+
+/* Navigation */
+.top-nav:hover {
+  opacity: .75;
+  transition-duration: 300ms;
+}
+ 
+
+/* Footer */
+  footer {
+    position: relative;
+  display: flex;
+  width: 100%;
+}
+
+.list1 {
+  position: absolute;
+  left: 8%;
+  top: 10%;
+  color: silver;
+}
+
+.list4 {
+position: absolute;
+left: 75%;
+top: 10%;
+color: silver;
+}
+
+.list2 {
+  position: absolute;
+  left: 25%;  
+  top: 10%;
+  color: silver;
+}

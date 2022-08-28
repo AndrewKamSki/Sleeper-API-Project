@@ -6,7 +6,7 @@ body {
 /* Card Stylings */
 .card {
   background-color: #0f471c;
-  box-shadow: 5px 5px 5px darkgray;
+  box-shadow: 4px 4px 5px rgb(121, 121, 121);
   border: 1px solid white;
   border-radius: 10px;
 } .card-body {
@@ -26,35 +26,28 @@ body {
 
 /* Navigation */
 .top-nav:hover {
-  opacity: .75;
+  text-shadow: 0 0 10px #13b813;
   transition-duration: 300ms;
 }
  
 
 /* Footer */
-  footer {
-    position: relative;
+.footer-lists {
   display: flex;
-  width: 100%;
-}
-
-.list1 {
-  position: absolute;
-  left: 8%;
-  top: 10%;
-  color: silver;
-}
-
-.list4 {
-position: absolute;
-left: 75%;
-top: 10%;
-color: silver;
-}
-
-.list2 {
-  position: absolute;
-  left: 25%;  
-  top: 10%;
-  color: silver;
+  justify-content: space-around;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+  box-shadow: 5px 5px 50px gray;
+  border-top: 1px solid black;
+} .lists {
+  color: lightgray;
+} .lists a {
+  color: white;
+  text-decoration: none;
+} .lists a:hover {
+  color: #13b813;
+  transition-duration: 500ms;
+} footer ul {
+  margin: 0%;
+  padding: 0%; 
 }

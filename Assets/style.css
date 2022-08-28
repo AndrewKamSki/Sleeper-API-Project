@@ -18,12 +18,13 @@ body {
 .card-footer {
   background-color: silver;
 } .card-body {
-  background-image: url(https://t3.ftcdn.net/jpg/04/83/81/78/360_F_483817817_dVwUCdYSLnITSsOpsLr42bnUz9Xit92N.jpg);
+  background-image: url(./Images/Main\ Football\ Field\ Picture.png);
 } .card-text {
   color: whitesmoke;
 } .card-title {
   font-style: italic;
-  color: whitesmoke
+  color: rgb(255, 255, 255);
+  text-shadow: black;
 } .card-header {
   background-color: rgb(255, 255, 255,.25);
 } .card {

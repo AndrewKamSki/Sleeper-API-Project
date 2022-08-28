@@ -6,21 +6,21 @@ function getLeagues () {
     return response.json();
   })
   .then(function(info) {
-    console.log(info)
+    //console.log(info)
     var userID = info.user_id;
     localStorage.setItem('user_id', JSON.stringify(userID));
-    console.log(userID);
+    //console.log(userID);
     var season = moment().format('YYYY'); 
-    console.log(season)
+    //console.log(season)
     var leaguesURL = "https://api.sleeper.app/v1/user/" + userID + "/leagues/nfl/" + season;
-    console.log(leaguesURL)
+    //console.log(leaguesURL)
     fetch(leaguesURL) 
     .then(function(response) {
       return response.json();
     })
     .then(function(info) {
-      console.log(info)
-      console.log(info[0].name)
+      //console.log(info)
+      //console.log(info[0].name)
       for (var i=0; i<info.length; i++) {
         var leagueEl = document.createElement("button");
         leagueEl.textContent = info[i].name;

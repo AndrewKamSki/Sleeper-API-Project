@@ -38,3 +38,18 @@ function getLeagues () {
 }
 
 $('#continue').on('click', getLeagues);
+$('#continue').on('click', getRecentUser);
+
+
+// Local Stoarge with user name
+
+var userName = document.getElementById("user-name")
+function getRecentUser() {
+  var userNameValue = document.getElementById("user-name").value
+  localStorage.setItem("Recent User", userNameValue)
+}
+
+function recentUser() {
+  userName.textContent = localStorage.getItem("Recent User")
+}
+recentUser()

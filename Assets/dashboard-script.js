@@ -3,10 +3,13 @@ function loadIDs () {
   var leagueID = JSON.parse(localStorage.getItem('league_id'));
   console.log(userID);
   console.log(leagueID);
+  return {userID,leagueID}
 }
 
 function getLeagueInfo () {
-  // Player Info Fetch
+  var ids = loadIDs();
+  var userID = ids.userID;
+  var leagueID = ids.leagueID;
   var playersURL = 'https://api.sleeper.app/v1/players/nfl';
   fetch(playersURL)
   .then(function(response) {
@@ -16,7 +19,7 @@ function getLeagueInfo () {
     console.log(info)
   })
 
-  // Transactions Info Fetch
+  // Transactions Info Fetch for Weeks 0 - 17
   var weeks = 17;
   for (var i=0; i<weeks; i++) {
     var transactionsURL = 'https://api.sleeper.app/v1/league/' + leagueID + '/transactions/' + [i];
@@ -31,7 +34,7 @@ function getLeagueInfo () {
 }
 
 function init () {
-  loadIDs();
+
   getLeagueInfo();
 }
 

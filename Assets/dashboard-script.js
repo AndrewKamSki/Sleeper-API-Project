@@ -54,7 +54,17 @@ function getLeagueInfo () {
           for (var j=0; j<starterIDs.length; j++) {
             for (var k=0; k<players.length; k++) {
               if (starterIDs[j] == players[k].playerID) {
-                //console.log(players[k].name)
+                console.log(players[k].name)
+                var positionEl = document.createElement('h4');
+                positionEl.classList.add("font-weight-bold", "p-1")
+                positionEl.textContent = players[k].position + ': ';
+                var playerEl = document.createElement('span');
+                playerEl.classList.add("font-weight-normal")
+                playerEl.textContent = players[k].name;
+                playerEl.id = players[k].playerID;
+                //playerEl.name = player[k].position;
+                positionEl.append(playerEl)
+                $('#starters').append(positionEl)
               }
             }
           }
@@ -108,7 +118,7 @@ function getLeagueInfo () {
         }
 
       }
-      console.log(trades);
+      //console.log(trades);
     })
   }
 }

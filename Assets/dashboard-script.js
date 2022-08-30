@@ -72,7 +72,7 @@ function getLeagueInfo () {
   .then(function(data) {
     var leagueName = data.name;
     $('#league-name').text(leagueName);
-    console.log(data)
+    //console.log(data)
   })
   var leagueUsersURL = 'https://api.sleeper.app/v1/league/' + leagueID + '/users';
   fetch(leagueUsersURL)
@@ -80,10 +80,10 @@ function getLeagueInfo () {
     return response.json();
   })
   .then(function(data) {
-    console.log(data)
+    //console.log(data)
     for(var i=0; i<data.length; i++) {
-      console.log(data[i].display_name)
-      console.log(data[i].user_id)
+      //console.log(data[i].display_name)
+      //console.log(data[i].user_id)
     }
   })
   // Transactions Info Fetch for Weeks 0 - 17
@@ -95,7 +95,20 @@ function getLeagueInfo () {
       return response.json();
     })
     .then(function(info) {
-      //console.log(info)
+      var trades = [];
+      for(var j=0; j<info.length; j++) {
+        if(info[j].type === 'trade') {
+          var trade = {
+            playersAdded: info[j].adds,
+            playersDropped: info[j].drops,
+            users: info[j].consenter_ids,
+            picks: info[j].draft_picks
+          }
+          trades.push(trade);
+        }
+
+      }
+      console.log(trades);
     })
   }
 }

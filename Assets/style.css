@@ -19,8 +19,13 @@ body {
   background-color: silver;
 } .card-body {
   background-image: url(./Images/Main\ Football\ Field\ Picture.png);
+  background-size: cover;
+  background-repeat:repeat;
 } .card-text {
-  color: whitesmoke;
+  /* color: whitesmoke; */
+  color:gold;
+  font-size: 20px;
+
 } .card-title {
   font-style: italic;
   color: rgb(255, 255, 255);
@@ -51,6 +56,10 @@ header {
   box-shadow: 2px 2px 10px black;
 }
  
+/* table body background */
+tbody {
+  background-color: darkgreen;
+}
   
 /* Footer */
 footer {

@@ -25,7 +25,6 @@ function getLeagueInfo () {
         playerID: data[key].player_id,
         position: data[key].position,
         name: data[key].full_name
-
       }
       players.push(player)
     }
@@ -54,7 +53,7 @@ function getLeagueInfo () {
           for (var j=0; j<starterIDs.length; j++) {
             for (var k=0; k<players.length; k++) {
               if (starterIDs[j] == players[k].playerID) {
-                console.log(players[k].name)
+                // console.log(players[k].name)
                 var positionEl = document.createElement('h4');
                 positionEl.classList.add("font-weight-bold", "p-1")
                 positionEl.textContent = players[k].position + ': ';
@@ -73,7 +72,15 @@ function getLeagueInfo () {
     })
   })
 
-  // League Information Section
+  var rostersURL = 'https://api.sleeper.app/v1/league/' + leagueID + '/rosters'
+  fetch(rostersURL)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    console.log(data)
+  })
+  // Display League Name on Dashboard
   var leagueURL = 'https://api.sleeper.app/v1/league/' + leagueID;
   fetch(leagueURL)
   .then(function(response) {
@@ -84,18 +91,54 @@ function getLeagueInfo () {
     $('#league-name').text(leagueName);
     //console.log(data)
   })
+
   var leagueUsersURL = 'https://api.sleeper.app/v1/league/' + leagueID + '/users';
   fetch(leagueUsersURL)
   .then(function(response) {
     return response.json();
   })
   .then(function(data) {
-    //console.log(data)
+    console.log(data)
+    teams = [];
     for(var i=0; i<data.length; i++) {
-      //console.log(data[i].display_name)
-      //console.log(data[i].user_id)
+      team = {
+        playerName: data[i].display_name,
+        playerID: data[i].user_id,
+        teamName: data[i].metadata.team_name
+      }
+      if (team.teamName == undefined) {
+        team.teamName = data[i].display_name + "'s Team";
+      }
+      teams.push(team);
     }
+    console.log(teams)
+    var tableEl = document.createElement("table");
+    var tableHeadersEl = document.createElement("thead")
+    var tableRowEl = document.createElement("tr")
+    var teamNameEl = document.createElement("th")
+    teamNameEl.classList.add("col")
+    teamNameEl.textContent = "Team Name";
+    var ownerEl = document.createElement("th")
+    ownerEl.scope = "col";
+    ownerEl.textContent = "Owner";
+    tableRowEl.append(teamNameEl, ownerEl);
+    tableHeadersEl.append(tableRowEl);
+    tableEl.append(tableHeadersEl);
+    var bodyEl = document.createElement("tbody");
+    for (var i=0; i<teams.length; i++) {
+      var tableRowEl = document.createElement("tr")
+      var teamNameEl = document.createElement("td")
+      var ownerNameEl = document.createElement("td")
+      teamNameEl.textContent = teams[i].teamName;
+      ownerNameEl.textContent = teams[i].playerName;
+      tableRowEl.id = teams[i].playerID;
+      tableRowEl.append(teamNameEl, ownerNameEl)
+      bodyEl.append(tableRowEl)
+    }
+    tableEl.append(bodyEl)
+    $('#teams').append(tableEl)
   })
+
   // Transactions Info Fetch for Weeks 0 - 17
   var weeks = 17;
   for (var i=0; i<weeks; i++) {

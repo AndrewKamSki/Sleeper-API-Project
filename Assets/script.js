@@ -23,6 +23,11 @@ function getLeagues () {
       //console.log(info[0].name)
       for (var i=0; i<info.length; i++) {
         var leagueEl = document.createElement("button");
+        leagueEl.classList.add("bg-dark", "text-white", "p-2", "font-weight-bold")
+        if (i === info.length-1) {
+          leagueEl.setAttribute("style", "border-bottom-left-radius: 5px; border-bottom-right-radius: 5px")
+          console.log("good")
+        }
         leagueEl.textContent = info[i].name;
         var leagueID = info[i].league_id;
         leagueEl.id = leagueID;

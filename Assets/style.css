@@ -29,6 +29,9 @@ body {
   background-color: rgb(255, 255, 255,.25);
 } .card {
   box-shadow: 4px 4px 40px black;
+} .text-input {
+  height: 50px;
+  resize: none;
 }
 
 

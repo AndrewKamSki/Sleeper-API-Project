@@ -55,7 +55,7 @@ function getLeagueInfo () {
               if (starterIDs[j] == players[k].playerID) {
                 // console.log(players[k].name)
                 var positionEl = document.createElement('h4');
-                positionEl.classList.add("font-weight-bold", "p-1")
+                positionEl.classList.add("font-weight-bold", "p-1", "pl-3")
                 positionEl.textContent = players[k].position + ': ';
                 var playerEl = document.createElement('span');
                 playerEl.classList.add("font-weight-normal")
@@ -113,14 +113,16 @@ function getLeagueInfo () {
     }
     console.log(teams)
     var tableEl = document.createElement("table");
+    tableEl.classList.add("col-12")
     var tableHeadersEl = document.createElement("thead")
     var tableRowEl = document.createElement("tr")
     var teamNameEl = document.createElement("th")
-    teamNameEl.classList.add("col")
+    teamNameEl.classList.add("col", "text-medium-lg", "col-8", "text-center", "font-weight-bolder", "white-border", "bg-secondary")
     teamNameEl.textContent = "Team Name";
     var ownerEl = document.createElement("th")
     ownerEl.scope = "col";
     ownerEl.textContent = "Owner";
+    ownerEl.classList.add("text-medium-lg", "col-4", "text-center", "font-weight-bolder", "white-border", "bg-secondary")
     tableRowEl.append(teamNameEl, ownerEl);
     tableHeadersEl.append(tableRowEl);
     tableEl.append(tableHeadersEl);
@@ -128,7 +130,9 @@ function getLeagueInfo () {
     for (var i=0; i<teams.length; i++) {
       var tableRowEl = document.createElement("tr")
       var teamNameEl = document.createElement("td")
+      teamNameEl.classList.add("p-1", "text-small", "pl-3", "white-border", "bg-dark")
       var ownerNameEl = document.createElement("td")
+      ownerNameEl.classList.add("p-1", "text-small", "pl-3", "white-border", "bg-dark")
       teamNameEl.textContent = teams[i].teamName;
       ownerNameEl.textContent = teams[i].playerName;
       tableRowEl.id = teams[i].playerID;
@@ -136,7 +140,7 @@ function getLeagueInfo () {
       bodyEl.append(tableRowEl)
     }
     tableEl.append(bodyEl)
-    $('#teams').append(tableEl)
+    $('#teams').append(tableEl) 
   })
 
   // Transactions Info Fetch for Weeks 0 - 17
@@ -170,5 +174,17 @@ function init () {
 
   getLeagueInfo();
 }
-
 init()
+
+// Set user's username as starter team header
+function starterUserName() {
+  var userNameHeader = document.getElementById("username")
+  var localUserName = localStorage.getItem("recent_user")
+  if (localUserName === null) {
+    userNameHeader.textContent = "No Starters Found"
+    return;
+  } else {
+    userNameHeader.textContent = localUserName + "'s Starters"
+  }
+}
+starterUserName()

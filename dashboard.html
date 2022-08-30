@@ -35,11 +35,12 @@
 <body>
     <container class="container">
       
-      <section class="col-12 d-flex">
-        <aside class="col-6 d-flex justify-content-center">
-          <div class="card" style="width: 80%;">
+      <container id="top-mid-container" class="col-12">
+      <section class="col-xl-6 col-lg-12 d-flex" id="mid-left-sec">
+        <aside class="col-12 d-flex justify-content-center">
+          <div class="card mid-cards">
             <div class="card-body p-0">
-              <h1 class="card-title font-weight-bold text-center bg-dark p-3 border-bottom"><span id='username'>{User}</span>'s Starters</h1>
+              <h1 class="card-title font-weight-bold text-center bg-dark p-3 border-bottom"><span id='username'></span></h1>
               <div class="p-3" id="starters">
               <!-- <h4 class="font-weight-bold p-1">FILLER: <span class="font-weight-normal">OUTPUT</span></h4>
               <h4 class="font-weight-bold p-1">FILLER: <span class="font-weight-normal">OUTPUT</span></h4>
@@ -51,8 +52,10 @@
             </div>
           </div>
         </aside>
-        <aside class="col-6 d-flex justify-content-center">
-          <div class="card" style="width: 80%;">
+        </section>
+        <section class="col-xl-6 col-lg-12 d-flex" id="mid-right-sec">
+        <aside class="col-12 d-flex justify-content-center">
+          <div class="card mid-cards">
             <div class="card-body p-0">
               <h1 class="card-title font-weight-bold text-center bg-dark p-3 border-bottom" id="league-name">{League Name}</h1>
               <div class="p-3" id="teams" >
@@ -67,8 +70,12 @@
           </div>
         </aside>
       </section>
-      <section class="mt-5 d-flex justify-content-center mb-5">
-        <div class="card" style="width: 87.3%;">
+      </container>
+
+      <container class="container col-12 d-flex">
+      <section class="mt-5 d-flex justify-content-center mb-5 col-12">
+        <aside class="col-12 d-flex justify-content-center">
+        <div class="card bottom-card">
           <div class="card-body p-0">
             <h1 class="card-title font-weight-bold text-center bg-dark p-3 border-bottom">{League}'s Recent Trades</h1>
             <div class="p-3">
@@ -87,7 +94,9 @@
             </div>
           </div>
         </div>
+        </aside>
       </section>
+      </container>
 
     </container>
 

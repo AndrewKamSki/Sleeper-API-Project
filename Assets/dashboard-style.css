@@ -1,7 +1,10 @@
 /* Overall Stylings */
 body {
   background-color: silver;
+} .white-border {
+  border: 1px solid white;
 }
+
 
 /* Card Stylings */
 .card {
@@ -21,6 +24,10 @@ body {
   font-size: 25px;
 } .text-large {
   font-size: 50px;
+} .text-medium-lg {
+  font-size: 35px;
+} .text-small {
+  font-size: 20px;
 }
 
 
@@ -51,3 +58,31 @@ body {
   margin: 0%;
   padding: 0%; 
 }
+
+/* Mobile Friendly*/
+#top-mid-container {
+  justify-content: space-between;
+  display: flex;
+} .mid-cards {
+  width: 80%;
+} .bottom-card {
+  width: 90.3%;
+} #bottom-container {
+  display: flex;
+}
+  
+@media screen and (max-width: 1199px) {
+  #top-mid-container {
+    justify-content: none;
+    display: block;
+  } #mid-right-sec {
+    margin-top: 20px;
+  } .mid-cards {
+    width: 90%;
+  } .bottom-card {
+    width: 90%;
+  } #bottom-container {
+    display: block;
+  }
+    
+}  

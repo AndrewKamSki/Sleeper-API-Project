@@ -51,10 +51,10 @@ $('#continue').on('click', getRecentUser);
 var userName = document.getElementById("user-name")
 function getRecentUser() {
   var userNameValue = document.getElementById("user-name").value
-  localStorage.setItem("recent_user", userNameValue)
+  localStorage.setItem("Recent User", userNameValue)
 }
 
 function recentUser() {
-  userName.textContent = localStorage.getItem("recent_user")
+  userName.textContent = localStorage.getItem("Recent User")
 }
 recentUser()

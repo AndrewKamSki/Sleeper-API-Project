@@ -1,8 +1,8 @@
 function loadIDs () {
   var userID = JSON.parse(localStorage.getItem('user_id'));
   var leagueID = JSON.parse(localStorage.getItem('league_id'));
-  console.log(userID);
-  console.log(leagueID);
+  //console.log(userID);
+  //console.log(leagueID);
   return {userID,leagueID}
 }
 
@@ -72,14 +72,6 @@ function getLeagueInfo () {
     })
   })
 
-  var rostersURL = 'https://api.sleeper.app/v1/league/' + leagueID + '/rosters'
-  fetch(rostersURL)
-  .then(function(response) {
-    return response.json();
-  })
-  .then(function(data) {
-    console.log(data)
-  })
   // Display League Name on Dashboard
   var leagueURL = 'https://api.sleeper.app/v1/league/' + leagueID;
   fetch(leagueURL)
@@ -98,7 +90,7 @@ function getLeagueInfo () {
     return response.json();
   })
   .then(function(data) {
-    console.log(data)
+    //console.log(data)
     teams = [];
     for(var i=0; i<data.length; i++) {
       team = {
@@ -111,7 +103,7 @@ function getLeagueInfo () {
       }
       teams.push(team);
     }
-    console.log(teams)
+    //console.log(teams)
     var tableEl = document.createElement("table");
     var tableHeadersEl = document.createElement("thead")
     var tableRowEl = document.createElement("tr")
@@ -139,31 +131,118 @@ function getLeagueInfo () {
     $('#teams').append(tableEl)
   })
 
-  // Transactions Info Fetch for Weeks 0 - 17
-  var weeks = 17;
-  for (var i=0; i<weeks; i++) {
-    var transactionsURL = 'https://api.sleeper.app/v1/league/' + leagueID + '/transactions/' + [i];
-    fetch(transactionsURL)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(info) {
-      var trades = [];
-      for(var j=0; j<info.length; j++) {
-        if(info[j].type === 'trade') {
-          var trade = {
-            playersAdded: info[j].adds,
-            playersDropped: info[j].drops,
-            users: info[j].consenter_ids,
-            picks: info[j].draft_picks
-          }
-          trades.push(trade);
-        }
 
+  // Transactions Info Fetch for Weeks 0 - 17
+  var playersURL = 'https://api.sleeper.app/v1/players/nfl';
+  fetch(playersURL)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    //console.log(data)
+    var players = [];
+    for(var key in data) {
+      var player = {
+        playerID: data[key].player_id,
+        position: data[key].position,
+        name: data[key].full_name
       }
-      //console.log(trades);
-    })
-  }
+      players.push(player)
+    }
+    //console.log(players)
+    var weeks = 2;
+    var trades = [];
+    for (var i=1; i<weeks; i++) {
+      var transactionsURL = 'https://api.sleeper.app/v1/league/' + leagueID + '/transactions/' + [i];
+      fetch(transactionsURL)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(info) {
+        //console.log(info)
+        for(var j=0; j<info.length; j++) {
+          if (info[j].type === 'trade') {
+            var trade = {
+              playersAdded: info[j].adds,
+              user1: info[j].consenter_ids[0],
+              user2: info[j].consenter_ids[1],
+              picks: info[j].draft_picks
+            }
+            for (var k=0; k<players.length; k++) {
+              for (var playerID in info[j].adds) {
+                if (playerID == players[k].playerID) {
+                  trade.playersAdded[playerID] = [players[k].name, trade.playersAdded[playerID]];
+                }
+              }
+            }
+            trades.push(trade);
+          }
+        }
+        // console.log('trades')
+        // console.log(trades);
+        // Populating the trades
+        var tableEl = document.createElement("table");
+        tableEl.classList.add("table", "table-bordered", "text-white")
+        var tableHeadersEl = document.createElement("thead")
+        var tableRowEl = document.createElement("tr")
+        var side1El = document.createElement("th")
+        side1El.classList.add("col-6")
+        side1El.textContent = "Side 1 Receives";
+        var side2El = document.createElement("th")
+        side2El.scope = "col-6";
+        side2El.textContent = "Side 2 Receives";
+        tableRowEl.append(side1El,side2El);
+        tableHeadersEl.append(tableRowEl);
+        tableEl.append(tableHeadersEl);
+        var bodyEl = document.createElement("tbody");
+        for (var i=0; i<5; i++) {
+          var tableRowEl = document.createElement("tr")
+          var user1El = document.createElement("td")
+          var user2El = document.createElement("td")
+          for (var player in trades[i].playersAdded) {
+            // players involved in trade for user1
+            if (trades[i].playersAdded[player][1] == trades[i].user1) {
+              if (user1El.textContent !== undefined) {
+                user1El.innerHTML = user1El.textContent + '<br>' + trades[i].playersAdded[player][0];
+              } else {
+                user1El.innerHTML = trades[i].playersAdded[player][0];
+              }
+            }
+            // players involved in trade for user2
+            if (trades[i].playersAdded[player][1] == trades[i].user2) {
+              if (user2El.textContent !== undefined) {
+                user2El.innerHTML = user2El.textContent + '<br>' + trades[i].playersAdded[player][0];
+              } else {
+                user2El.innerHTML = trades[i].playersAdded[player][0];
+              }
+            }
+          }
+          for (var pick in trades[i].picks) {
+            // picks involved in trade for user1
+            if (trades[i].picks[pick].owner_id == trades[i].user1) {
+              if (user1El.textContent !== undefined) {
+                user1El.innerHTML = user1El.textContent + '<br>' + trades[i].picks[pick].season + ' Round ' + trades[i].picks[pick].round + ' pick';
+              } else {
+                user1El.innerHTML = trades[i].picks[pick].season + ' Round ' + trades[i].picks[pick].round + ' pick';
+              }
+            }
+            // picks involved in trade for user2
+            if (trades[i].picks[pick].owner_id == trades[i].user2) {
+              if (user2El.textContent !== undefined) {
+                user2El.innerHTML = user2El.textContent + '<br>' + trades[i].picks[pick].season + ' Round ' + trades[i].picks[pick].round + ' pick';
+              } else {
+                user2El.innerHTML = trades[i].picks[pick].season + ' Round ' + trades[i].picks[pick].round + ' pick';
+              }
+            }
+          }
+          tableRowEl.append(user1El, user2El)
+          bodyEl.append(tableRowEl)
+        }
+        tableEl.append(bodyEl)
+        $('#trades').append(tableEl)
+      })
+    }
+  })
 }
 
 function init () {

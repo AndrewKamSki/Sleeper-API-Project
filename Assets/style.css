@@ -55,11 +55,6 @@ header {
   border-radius: 10px;
   box-shadow: 2px 2px 10px black;
 }
- 
-/* table body background */
-tbody {
-  background-color: darkgreen;
-}
   
 /* Footer */
 footer {
@@ -92,3 +87,5 @@ footer {
   margin: 0%;
   padding: 0%; 
 }
+
+

@@ -46,15 +46,24 @@ function getLeagues () {
 $('#continue').on('click', getLeagues);
 $('#continue').on('click', getRecentUser);
 
+// Execute a click button function when the user presses 'Enter' on the keyboard
+$('#user-name').on("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    $("#continue").click();
+  }
+});
+
 // Local Storage saving recently submitted username
+
 var userName = document.getElementById("user-name")
 function getRecentUser() {
   var userNameValue = document.getElementById("user-name").value
-  localStorage.setItem("Recent User", userNameValue)
+  localStorage.setItem("recent_user", userNameValue)
 }
 
 // Local Storage retrieving recently submitted username to prefill input field on reload of page
 function recentUser() {
-  userName.textContent = localStorage.getItem("Recent User")
+  userName.textContent = localStorage.getItem("recent_user")
 }
 recentUser()

@@ -1,16 +1,17 @@
+// Assigns top header the current username
 var userNameLocal = localStorage.getItem("recent_user")
 var headerTitle = document.getElementById("team-title")
-
 headerTitle.textContent = userNameLocal + "'s Roster"
 
+// loads in the saved IDs
 function loadIDs () {
   var userID = JSON.parse(localStorage.getItem('user_id'));
   var leagueID = JSON.parse(localStorage.getItem('league_id'));
-  //console.log(userID);
-  //console.log(leagueID);
-  return {userID,leagueID}
+  return {userID,leagueID};
 }
 
+// Function to get team roster
+// Exact same as starting roster fetch, but instead pulls entire roster
 function getTeamRoster () {
   var ids = loadIDs();
   var userID = ids.userID;
@@ -37,7 +38,6 @@ function getTeamRoster () {
       }
       players.push(player)
     }
-
 
     // Get Rosters Fetch
     var rostersURL = 'https://api.sleeper.app/v1/league/' + leagueID + '/rosters'
@@ -81,9 +81,7 @@ function getTeamRoster () {
   })
 }
 
-
 function init () {
-
   getTeamRoster();
 }
 init()

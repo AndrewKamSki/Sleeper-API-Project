@@ -1,26 +1,25 @@
+// function gets a users leagues and displays them as clickable buttons to navigate
+// to the dashboard page.
 function getLeagues () {
   var userName = $('#user-name').val();
   var userURL = 'https://api.sleeper.app/v1/user/' + userName;
+  // fetch call retrieves the userID for a given username
   fetch(userURL)
   .then(function(response) {
     return response.json();
   })
   .then(function(info) {
-    //console.log(info)
     var userID = info.user_id;
     localStorage.setItem('user_id', JSON.stringify(userID));
-    //console.log(userID);
     var season = moment().format('YYYY'); 
-    //console.log(season)
     var leaguesURL = "https://api.sleeper.app/v1/user/" + userID + "/leagues/nfl/" + season;
-    //console.log(leaguesURL)
+    // fetch call retrieves the leagues a given userID has for a given season
+    // function then prints the leagues to the page
     fetch(leaguesURL) 
     .then(function(response) {
       return response.json();
     })
     .then(function(info) {
-      //console.log(info)
-      //console.log(info[0].name)
       for (var i=0; i<info.length; i++) {
         var leagueEl = document.createElement("button");
         leagueEl.classList.add("bg-dark", "text-white", "p-2", "font-weight-bold")
@@ -31,6 +30,7 @@ function getLeagues () {
         leagueEl.textContent = info[i].name;
         var leagueID = info[i].league_id;
         leagueEl.id = leagueID;
+        // navigates to the dasboard page based on the league button that is clicked
         leagueEl.onclick = function () {
           localStorage.setItem('league_id',JSON.stringify(this.id));
           var dashboardHTML = './dashboard.html';
@@ -42,6 +42,7 @@ function getLeagues () {
   })
 }
 
+// Click events to retrieve leagues on submission of username
 $('#continue').on('click', getLeagues);
 $('#continue').on('click', getRecentUser);
 
@@ -53,8 +54,7 @@ $('#user-name').on("keypress", function(event) {
   }
 });
 
-
-// Local Stoarge with user name
+// Local Storage saving recently submitted username
 
 var userName = document.getElementById("user-name")
 function getRecentUser() {
@@ -62,6 +62,7 @@ function getRecentUser() {
   localStorage.setItem("recent_user", userNameValue)
 }
 
+// Local Storage retrieving recently submitted username to prefill input field on reload of page
 function recentUser() {
   userName.textContent = localStorage.getItem("recent_user")
 }

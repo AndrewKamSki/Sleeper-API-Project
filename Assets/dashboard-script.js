@@ -155,9 +155,12 @@ function getLeagueInfo () {
       players.push(player)
     }
     //console.log(players)
-    var weeks = 2;
+    var week = moment().format('w')-35;
+    if (week < 2) {
+      week = 2;
+    }
     var trades = [];
-    for (var i=1; i<weeks; i++) {
+    for (var i=1; i<week; i++) {
       var transactionsURL = 'https://api.sleeper.app/v1/league/' + leagueID + '/transactions/' + [i];
       fetch(transactionsURL)
       .then(function(response) {
@@ -206,7 +209,7 @@ function getLeagueInfo () {
           var user2El = document.createElement("td")
           for (var player in trades[i].playersAdded) {
             // players involved in trade for user1
-            console.log(trades[i].playersAdded[player][0])
+            //console.log(trades[i].playersAdded[player][0])
             if (trades[i].playersAdded[player][1] == trades[i].user1) {
               if (user1El.textContent !== undefined) {
                 user1El.innerHTML = user1El.textContent + '<br>' + trades[i].playersAdded[player][0];

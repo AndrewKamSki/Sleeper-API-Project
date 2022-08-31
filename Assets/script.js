@@ -45,16 +45,24 @@ function getLeagues () {
 $('#continue').on('click', getLeagues);
 $('#continue').on('click', getRecentUser);
 
+// Execute a click button function when the user presses 'Enter' on the keyboard
+$('#user-name').on("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    $("#continue").click();
+  }
+});
+
 
 // Local Stoarge with user name
 
 var userName = document.getElementById("user-name")
 function getRecentUser() {
   var userNameValue = document.getElementById("user-name").value
-  localStorage.setItem("Recent User", userNameValue)
+  localStorage.setItem("recent_user", userNameValue)
 }
 
 function recentUser() {
-  userName.textContent = localStorage.getItem("Recent User")
+  userName.textContent = localStorage.getItem("recent_user")
 }
 recentUser()

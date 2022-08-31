@@ -1,4 +1,4 @@
-var userNameLocal = localStorage.getItem("Recent User")
+var userNameLocal = localStorage.getItem("recent_user")
 var headerTitle = document.getElementById("team-title")
 
 headerTitle.textContent = userNameLocal + "'s Roster"

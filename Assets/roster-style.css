@@ -1,0 +1,22 @@
+/* table body background */
+tbody {
+  background-color: darkgreen;
+} body {
+  background-color: #0f471c;
+  min-height: 100%;
+} 
+
+/* Card Styling */
+.card-body {
+  background-image: url(./Images/Main\ Football\ Field\ Picture.png);
+  background-size: cover;
+  background-repeat:repeat;
+} .card-text {
+  /* color: whitesmoke; */
+  color:gold;
+  font-size: 20px;
+} 
+
+/* Roster Styling */
+#main-table {
+}

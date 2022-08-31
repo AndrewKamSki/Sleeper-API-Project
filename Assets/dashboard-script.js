@@ -81,7 +81,8 @@ function getLeagueInfo () {
   .then(function(data) {
     var leagueName = data.name;
     $('#league-name').text(leagueName);
-    //console.log(data)
+    $('#league-name-bottom').text(leagueName + "'s Recent Trades");
+    // console.log(data)
   })
 
   var leagueUsersURL = 'https://api.sleeper.app/v1/league/' + leagueID + '/users';
@@ -190,10 +191,10 @@ function getLeagueInfo () {
         var tableHeadersEl = document.createElement("thead")
         var tableRowEl = document.createElement("tr")
         var side1El = document.createElement("th")
-        side1El.classList.add("col-6")
+        side1El.classList.add("col-6", "text-center", "font-weight-bolder", "text-medium-lg")
         side1El.textContent = "Side 1 Receives";
         var side2El = document.createElement("th")
-        side2El.scope = "col-6";
+        side2El.classList.add("col-6", "text-center", "font-weight-bolder", "text-medium-lg");
         side2El.textContent = "Side 2 Receives";
         tableRowEl.append(side1El,side2El);
         tableHeadersEl.append(tableRowEl);
@@ -205,11 +206,13 @@ function getLeagueInfo () {
           var user2El = document.createElement("td")
           for (var player in trades[i].playersAdded) {
             // players involved in trade for user1
+            console.log(trades[i].playersAdded[player][0])
             if (trades[i].playersAdded[player][1] == trades[i].user1) {
               if (user1El.textContent !== undefined) {
                 user1El.innerHTML = user1El.textContent + '<br>' + trades[i].playersAdded[player][0];
               } else {
                 user1El.innerHTML = trades[i].playersAdded[player][0];
+                
               }
             }
             // players involved in trade for user2
@@ -256,14 +259,14 @@ function init () {
 init()
 
 // Set user's username as starter team header
-function starterUserName() {
+function showUserName() {
   var userNameHeader = document.getElementById("username")
   var localUserName = localStorage.getItem("recent_user")
   if (localUserName === null) {
-    userNameHeader.textContent = "No Starters Found"
+    userNameHeader.textContent = "No User Found"
     return;
   } else {
     userNameHeader.textContent = localUserName + "'s Starters"
   }
 }
-starterUserName()
+showUserName()

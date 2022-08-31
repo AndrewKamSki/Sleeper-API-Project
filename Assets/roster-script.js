@@ -56,7 +56,7 @@ function getTeamRoster () {
               if (teamIDs[j] == players[k].playerID) {
                 console.log(players[k].position)
                 var rowEl = document.createElement('tr')
-                var posEl = document.createElement('td');
+                var posEl = document.createElement('td')
                 var nameEl = document.createElement('td')
                 var expEl = document.createElement('td')
                 var ageEl = document.createElement('td')

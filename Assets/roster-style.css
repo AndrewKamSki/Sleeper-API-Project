@@ -4,26 +4,73 @@ tbody {
 } body {
   background-color: #0f471c;
   min-height: 100%;
+  min-width: 100%;
 } 
 
 /* Card Styling */
-.card-body {
-  background-image: url(./Images/Main\ Football\ Field\ Picture.png);
-  background-size: cover;
-  background-repeat:repeat;
-  border: 1px solid whitesmoke;
-  border-radius: 5px;
-  box-shadow: 2px 2px 50px black;
-  text-align: center;
-} .card-text {
+.card-text {
   /* color: whitesmoke; */
   color:gold;
   font-size: 20px;
 } 
 
 /* Roster Styling */
-#main-table {
+#main-div {
   margin-top: 30px;
   margin-bottom: 70px;
+  margin-right: 15%;
+  margin-left: 15%;
+  border-radius: 5px;
+} #roster-table {
+  border: 2px solid whitesmoke;
+  border-radius: 5px;
+  box-shadow: 5px 5px 50px black;
+  text-align: center;
 }
 
+
+/* Text Stylings */
+.text-medium {
+  font-size: 25px;
+} .text-large {
+  font-size: 50px;
+} .text-medium-lg {
+  font-size: 35px;
+} .text-small {
+  font-size: 20px;
+}
+
+
+/* Navigation */
+.top-nav:hover {
+  text-shadow: 0 0 10px #13b813;
+  transition-duration: 300ms;
+}
+
+
+@media screen and (max-width: 820px) {
+  #main-div {
+    margin-right: 10%;
+    margin-left: 10%;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  #main-div {
+    margin-right: 5%;
+    margin-left: 5%;
+  }
+}
+
+@media screen and (max-width: 637px) {
+  #main-div {
+    margin-right: 0%;
+    margin-left: 0%;
+  }
+}
+
+@media screen and (max-width: 573px) {
+  #main-div {
+    overflow: scroll;
+  }
+}

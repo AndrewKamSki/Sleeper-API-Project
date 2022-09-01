@@ -70,6 +70,8 @@ body {
 } #bottom-container {
   display: flex;
 }
+
+
   
 @media screen and (max-width: 1199px) {
   #top-mid-container {
@@ -86,3 +88,25 @@ body {
   }
     
 }  
+
+@media screen and (max-width: 500px) {
+  .text-medium {
+    font-size: 15px;
+  } .text-large {
+    font-size: 40px;
+  } .text-medium-lg {
+    font-size: 25px;
+  } .text-small {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  #starters {
+    overflow: scroll;
+  } #teams {
+    overflow: scroll;
+  } #trades {
+    overflow: scroll;
+  }
+}

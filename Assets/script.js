@@ -55,7 +55,6 @@ $('#user-name').on("keypress", function(event) {
 });
 
 // Local Storage saving recently submitted username
-
 var userName = document.getElementById("user-name")
 function getRecentUser() {
   var userNameValue = document.getElementById("user-name").value
@@ -64,6 +63,7 @@ function getRecentUser() {
 
 // Local Storage retrieving recently submitted username to prefill input field on reload of page
 function recentUser() {
-  userName.textContent = localStorage.getItem("recent_user")
+  var recentUser = localStorage.getItem("recent_user")
+  userName.textContent = recentUser.replaceAll('"','');
 }
 recentUser()

@@ -120,9 +120,15 @@ function getLeagueInfo () {
       var teamNameEl = document.createElement("td")
       teamNameEl.classList.add("p-1", "text-small", "pl-3", "white-border", "bg-dark")
       var ownerNameEl = document.createElement("td")
-      ownerNameEl.classList.add("p-1", "text-small", "pl-3", "white-border", "bg-dark")
+      ownerNameEl.classList.add("p-1", "text-small", "pl-3", "white-border", "bg-dark", "custom-owner")
       teamNameEl.textContent = teams[i].teamName;
       ownerNameEl.textContent = teams[i].playerName;
+      ownerNameEl.id = teams[i].playerName;
+      ownerNameEl.onclick = function () {
+        localStorage.setItem('recent_user', JSON.stringify(this.id));
+        var indexHTML = './index.html';
+        location.assign(indexHTML);
+      }
       tableRowEl.id = teams[i].playerID;
       tableRowEl.append(teamNameEl, ownerNameEl);
       bodyEl.append(tableRowEl);
@@ -210,16 +216,15 @@ function getLeagueInfo () {
             //console.log(trades[i].playersAdded[player][0])
             if (trades[i].playersAdded[player][1] == trades[i].user1) {
               if (user1El.textContent !== undefined) {
-                user1El.innerHTML = user1El.textContent + '<br>' + trades[i].playersAdded[player][0];
+                user1El.innerHTML = user1El.textContent + ', ' + trades[i].playersAdded[player][0];
               } else {
                 user1El.innerHTML = trades[i].playersAdded[player][0];
-                
               }
             }
             // players involved in trade for user2
             if (trades[i].playersAdded[player][1] == trades[i].user2) {
               if (user2El.textContent !== undefined) {
-                user2El.innerHTML = user2El.textContent + '<br>' + trades[i].playersAdded[player][0];
+                user2El.innerHTML = user2El.textContent + ', ' + trades[i].playersAdded[player][0];
               } else {
                 user2El.innerHTML = trades[i].playersAdded[player][0];
               }
@@ -229,7 +234,7 @@ function getLeagueInfo () {
             // picks involved in trade for user1
             if (trades[i].picks[pick].owner_id == trades[i].user1) {
               if (user1El.textContent !== undefined) {
-                user1El.innerHTML = user1El.textContent + '<br>' + trades[i].picks[pick].season + ' Round ' + trades[i].picks[pick].round + ' pick';
+                user1El.innerHTML = user1El.textContent + ', ' + trades[i].picks[pick].season + ' Round ' + trades[i].picks[pick].round + ' pick';
               } else {
                 user1El.innerHTML = trades[i].picks[pick].season + ' Round ' + trades[i].picks[pick].round + ' pick';
               }
@@ -237,12 +242,14 @@ function getLeagueInfo () {
             // picks involved in trade for user2
             if (trades[i].picks[pick].owner_id == trades[i].user2) {
               if (user2El.textContent !== undefined) {
-                user2El.innerHTML = user2El.textContent + '<br>' + trades[i].picks[pick].season + ' Round ' + trades[i].picks[pick].round + ' pick';
+                user2El.innerHTML = user2El.textContent + ', ' + trades[i].picks[pick].season + ' Round ' + trades[i].picks[pick].round + ' pick';
               } else {
                 user2El.innerHTML = trades[i].picks[pick].season + ' Round ' + trades[i].picks[pick].round + ' pick';
               }
             }
           }
+          user1El.textContent = user1El.textContent.slice(2)
+          user2El.textContent = user2El.textContent.slice(2)
           tableRowEl.append(user1El, user2El);
           bodyEl.append(tableRowEl);
         }

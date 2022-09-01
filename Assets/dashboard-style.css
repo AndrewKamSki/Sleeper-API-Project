@@ -36,7 +36,12 @@ body {
   text-shadow: 0 0 10px #13b813;
   transition-duration: 300ms;
 }
- 
+.custom-owner:hover {
+  cursor: pointer;
+  text-shadow: 0 0 10px #13b813;
+  transition-duration: 300ms;
+}
+
 
 /* Footer */
 .footer-lists {

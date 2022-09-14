@@ -9,6 +9,12 @@ function getLeagues () {
     return response.json();
   })
   .then(function(info) {
+    if (info === null) {
+      console.log('no user')
+      document.getElementById('user-name').classList.add('console-error')
+      return;
+    }
+    document.getElementById('user-name').classList.remove('console-error')
     var userID = info.user_id;
     localStorage.setItem('user_id', JSON.stringify(userID));
     var season = moment().format('YYYY'); 

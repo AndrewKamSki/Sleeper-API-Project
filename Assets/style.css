@@ -89,3 +89,6 @@ footer {
 }
 
 
+.console-error {
+  border-color: red;
+}

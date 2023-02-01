@@ -17,7 +17,11 @@ function getLeagues () {
     document.getElementById('user-name').classList.remove('console-error')
     var userID = info.user_id;
     localStorage.setItem('user_id', JSON.stringify(userID));
-    var season = moment().format('YYYY'); 
+    if(moment().format('M') < 8) {
+      season = parseInt(moment().format('YYYY')) - 1;
+    } else {
+      season = moment().format('YYYY');
+    }
     var leaguesURL = "https://api.sleeper.app/v1/user/" + userID + "/leagues/nfl/" + season;
     // fetch call retrieves the leagues a given userID has for a given season
     // function then prints the leagues to the page
@@ -31,7 +35,6 @@ function getLeagues () {
         leagueEl.classList.add("bg-dark", "text-white", "p-2", "font-weight-bold")
         if (i === info.length-1) {
           leagueEl.setAttribute("style", "border-bottom-left-radius: 5px; border-bottom-right-radius: 5px")
-          console.log("good")
         }
         leagueEl.textContent = info[i].name;
         var leagueID = info[i].league_id;
@@ -50,7 +53,7 @@ function getLeagues () {
 
 // Click events to retrieve leagues on submission of username
 $('#continue').on('click', getLeagues);
-$('#continue').on('click', getRecentUser);
+// $('#continue').on('click', getRecentUser);
 
 // Execute a click button function when the user presses 'Enter' on the keyboard
 $('#user-name').on("keypress", function(event) {
